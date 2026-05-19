@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\IngredientRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
 class Ingredient
@@ -14,13 +15,31 @@ class Ingredient
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le nom est obligatoire.")]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: "Le nom doit contenir au moins {{ limit }} caractères.",
+        maxMessage: "Le nom ne peut pas dépasser {{ limit }} caractères."
+    )]
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Assert\NotNull(message: "Le prix est obligatoire.")]
+    #[Assert\Positive(message: "Le prix doit être supérieur à 0.")]
+    #[Assert\LessThan(
+        value: 200,
+        message: "Le prix doit être inférieur à {{ compared_value }}."
+    )]
     private ?float $price = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
     private ?\DateTimeImmutable $createdAt = null;
+
+    public function __construct() {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -35,7 +54,6 @@ class Ingredient
     public function setName(string $name): static
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -47,7 +65,6 @@ class Ingredient
     public function setPrice(float $price): static
     {
         $this->price = $price;
-
         return $this;
     }
 
@@ -59,7 +76,6 @@ class Ingredient
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 }
