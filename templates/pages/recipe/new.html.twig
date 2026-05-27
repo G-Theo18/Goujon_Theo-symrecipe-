@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'une recette{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4">Création d'une recette</h1>
+        {{ form_start(form) }}
+        <div class="row">
+            {{ form_errors(form.name) }}
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+        </div>
+        <div class="row">
+            {{ form_errors(form.time) }}
+            {{ form_label(form.time) }}
+            {{ form_widget(form.time) }}
+        </div>
+        <div class="row">
+            {{ form_errors(form.nbPersons) }}
+            {{ form_label(form.nbPersons) }}
+            {{ form_widget(form.nbPersons) }}
+        </div>
+        <div class="row">
+            {{ form_errors(form.difficulty) }}
+            {{ form_label(form.difficulty) }}
+            {{ form_widget(form.difficulty) }}
+        </div>
+        <div class="row">
+            {{ form_errors(form.description) }}
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+        </div>
+        <div class="row">
+            {{ form_errors(form.price) }}
+            {{ form_label(form.price) }}
+            {{ form_widget(form.price) }}
+        </div>
+        <div class="row">
+            {{ form_label(form.isFavorite) }}
+            {{ form_widget(form.isFavorite) }}
+        </div>
+        <div class="row">
+            {{ form_label(form.ingredients) }}
+            {{ form_widget(form.ingredients) }}
+        </div>
+        <div class="row">
+            {{ form_row(form.Valider) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

@@ -21,12 +21,12 @@ class RecipeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('time', IntegerType::class, ['required' => false])
-            ->add('nbPersons', IntegerType::class, ['required' => false])
-            ->add('difficulty', RangeType::class, ['attr' => ['min' => 1, 'max' => 5], 'required' => false])
-            ->add('description', TextareaType::class)
-            ->add('price', MoneyType::class, ['required' => false])
+            ->add('name', TextType::class, ['attr' => ['class' => 'form-control']])
+            ->add('time', IntegerType::class, ['attr' => ['class' => 'form-control'], 'required' => false])
+            ->add('nbPersons', IntegerType::class, ['attr' => ['class' => 'form-control'], 'required' => false])
+            ->add('difficulty', RangeType::class, ['attr' => ['class' => 'form-range', 'min' => 1, 'max' => 5], 'required' => false])
+            ->add('description', TextareaType::class, ['attr' => ['class' => 'form-control']])
+            ->add('price', MoneyType::class, ['attr' => ['class' => 'form-control'], 'required' => false])
             ->add('isFavorite', CheckboxType::class, ['required' => false])
             ->add('ingredients', EntityType::class, [
                 'class' => Ingredient::class,
@@ -35,7 +35,9 @@ class RecipeType extends AbstractType
                 'expanded' => true,
                 'required' => false
             ])
-            ->add('Valider', SubmitType::class)
+            ->add('Valider', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-primary mt-4']
+            ])
         ;
     }
 
